@@ -148,7 +148,6 @@ def update():
     list_id = request.args.getlist('id')
     product = COL.query.filter_by(id=int(list_id[0])).first()
     form = Add(name=product.name, price=product.price, image=product.image)
-    print(product.name)
     if form.validate_on_submit():
         product.name = form.name.data
         product.price = form.price.data
