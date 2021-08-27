@@ -1,16 +1,17 @@
-from functools import wraps
-
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask import Flask, render_template, url_for, redirect, jsonify, request, flash, abort
+# create file ignored_file.py with SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
+from idnored_file import SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
 from werkzeug.security import generate_password_hash, check_password_hash
+from wtforms.validators import DataRequired, Email, Length, URL
+from wtforms import SubmitField, StringField, PasswordField
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, PasswordField
-from wtforms.validators import DataRequired, Email, Length, URL
+from functools import wraps
 import stripe
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'dfkdskfdksaof8AFUWASIOTFJCZIOcx&F87EWSZU9RL'
+app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///col.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -18,9 +19,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 stripe_keys = {
-    'secret_key': 'sk_test_51JS3a0KKmcttL5TyftYbsNTpO16ZJTBA7slVnximEHXdq5oFd5f26LsrwqqnIqBWDYU3jt6Fqj3hn95TPUSgJ7PL00HMlMq79B',
-    'publishable_key': 'pk_test_51JS3a0KKmcttL5TySXiMnQY6zKz9zf9ywtJ6bCPTesoiQpPhAWRzhvvJ2sZJXe3rpa32dOmhD3P6kj7NGbdWDXAf003bO146HQ',
-    'endpoint_secret': 'endpoint'}
+    'secret_key': STRIPE_SECRET_KEY,
+    'publishable_key': STRIPE_PUBLISHABLE_KEY,}
 
 stripe.api_key = stripe_keys['secret_key']
 

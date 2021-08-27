@@ -1,0 +1,4 @@
+stripe~=2.60.0
+Flask~=2.0.1
+Werkzeug~=2.0.1
+WTForms~=2.3.3
