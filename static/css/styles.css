@@ -1,0 +1,36 @@
+img {
+width: 500px !important;
+height: 500px !important;
+object-fit: cover;
+}
+
+.button {
+background: #C68539 !important;
+border-color: #C68539 !important;
+}
+
+.button:hover {
+color: black !important;
+}
+
+.name-product {
+font-weight: 400;
+}
+
+.price {
+font-weight: 600;
+}
+
+.form-h1 {
+font-weight: 800;
+color: #C68539
+}
+
+.edit {
+color: #C68539 !important
+}
+
+.edit:hover {
+color: black !important;
+}
+

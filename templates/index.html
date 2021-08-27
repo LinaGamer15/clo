@@ -1,0 +1,29 @@
+{% include 'header.html' %}
+<div class="container" style="margin-top: 6%">
+    <div class="row">
+        {% if products %}
+        {% for product in products %}
+        <div class="col-lg-4 col-md-4 mx-auto">
+            {% if current_user.is_authenticated: %}
+            <a href='{{ url_for("buy", id=product.id) }}' onclick="myID({{ product.id }})"><img src="{{ product.image }}" alt="{{ product.name }}" class="img-fluid text-center"></a>
+            {% else: %}
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="img-fluid text-center">
+            {% endif %}
+            <p class="mt-3 name-product">{{ product.name }}</p>
+            <p class="price">${{ product.price }}</p>
+            {% if current_user.id == 1 %}
+            <a class="fas fa-pen mb-5 edit" href="{{ url_for('update', id=product.id) }}"><a class="fas fa-times ml-3 edit" href="{{ url_for('delete', id=product.id) }}"></a></a>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if current_user.id == 1 %}
+        <div class="col-lg-12 col-md-8 mx-auto text-center">
+        <a class="btn btn-dark btn-large rounded-pill shadow-sm mb-5 button" href="{{ url_for('add') }}">Add</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CLO</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+function myID(i) {
+  const stripe = Stripe('{{ key }}');
+  fetch('/buy?id='+i)
+  .then((result) => { return result.json(); })
+  .then((data) => {
+  console.log(data)
+    return stripe.redirectToCheckout({sessionId: data.sessionId})
+  });
+}
+</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous" ></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="mainNav" style="background: #C68539">
+    <a class="navbar-brand" href="{{ url_for('home') }}">
+    <img src="{{ url_for('static', filename='brand.svg') }}" width="5" height="5" alt="brand" class="d-inline-block align-top" style="height: 2rem !important; width: 2rem !important;">
+    CLO
+  </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            {% if current_user.is_authenticated: %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+          </li>
+            {% else %}
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('signin') }}">Sign In</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+          </li>
+            {% endif %}
+        </ul>
+      </div>
+  </nav>
