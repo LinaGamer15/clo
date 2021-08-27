@@ -1,7 +1,7 @@
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask import Flask, render_template, url_for, redirect, jsonify, request, flash, abort
 # create file ignored_file.py with SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
-from idnored_file import SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
+from idnored_file import SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, DOMAIN_URL
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms.validators import DataRequired, Email, Length, URL
 from wtforms import SubmitField, StringField, PasswordField
@@ -161,7 +161,7 @@ def update():
 def buy():
     id_ = request.args.getlist('id')
     product = COL.query.filter_by(id=int(id_[0])).first()
-    domain_url = 'http://localhost:5000/'
+    domain_url = DOMAIN_URL
     stripe.api_key = stripe_keys["secret_key"]
     try:
         checkout_session = stripe.checkout.Session.create(
