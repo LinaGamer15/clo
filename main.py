@@ -1,6 +1,6 @@
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask import Flask, render_template, url_for, redirect, jsonify, request, flash, abort
-# create file ignored_file.py with SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
+# create file ignored_file.py with SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, DOMAIN_URL
 from idnored_file import SECRET_KEY, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, DOMAIN_URL
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms.validators import DataRequired, Email, Length, URL
